@@ -1,0 +1,117 @@
+2015-07-30 15:13:07 Workerman[index.php] start in DEBUG mode
+2015-07-30 15:14:42 Workerman[index.php] Stopping ...
+2015-07-30 15:14:42 Workerman[index.php] has been stopped
+2015-07-30 15:29:39 Workerman[index.php] start in DEBUG mode
+2015-07-30 15:30:33 Workerman[index.php] Stopping ...
+2015-07-30 15:30:33 Workerman[index.php] has been stopped
+2015-07-30 15:44:48 Workerman[index.php] start in DEBUG mode
+2015-07-30 15:45:07 Workerman[index.php] Stopping ...
+2015-07-30 15:45:07 Workerman[index.php] has been stopped
+2015-07-30 16:29:55 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:31:58 Workerman[index.php] Stopping ...
+2015-07-30 16:31:58 Workerman[index.php] has been stopped
+2015-07-30 16:32:00 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:32:04 worker[none:4073] exit with status 65280
+2015-07-30 16:32:04 worker[none:4074] exit with status 65280
+2015-07-30 16:35:50 Workerman[index.php] Stopping ...
+2015-07-30 16:35:50 Workerman[index.php] has been stopped
+2015-07-30 16:35:52 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:36:10 Workerman[index.php] Stopping ...
+2015-07-30 16:36:10 Workerman[index.php] has been stopped
+2015-07-30 16:36:11 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:36:35 Workerman[index.php] Stopping ...
+2015-07-30 16:36:35 Workerman[index.php] has been stopped
+2015-07-30 16:37:12 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:37:18 worker[none:4271] exit with status 65280
+2015-07-30 16:37:18 worker[none:4272] exit with status 65280
+2015-07-30 16:38:30 Workerman[index.php] Stopping ...
+2015-07-30 16:38:30 Workerman[index.php] has been stopped
+2015-07-30 16:38:31 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:38:34 worker[none:4287] exit with status 65280
+2015-07-30 16:38:34 worker[none:4289] exit with status 65280
+2015-07-30 16:38:42 Workerman[index.php] Stopping ...
+2015-07-30 16:38:42 Workerman[index.php] has been stopped
+2015-07-30 16:38:48 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:38:51 worker[none:4447] exit with status 65280
+2015-07-30 16:38:51 worker[none:4448] exit with status 65280
+2015-07-30 16:41:16 Workerman[index.php] Stopping ...
+2015-07-30 16:41:16 Workerman[index.php] has been stopped
+2015-07-30 16:41:16 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:41:28 Workerman[index.php] Stopping ...
+2015-07-30 16:41:28 Workerman[index.php] has been stopped
+2015-07-30 16:41:36 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:42:50 Workerman[index.php] Stopping ...
+2015-07-30 16:42:50 Workerman[index.php] has been stopped
+2015-07-30 16:42:51 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:43:00 Workerman[index.php] Stopping ...
+2015-07-30 16:43:00 Workerman[index.php] has been stopped
+2015-07-30 16:43:10 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:45:57 Workerman[index.php] Stopping ...
+2015-07-30 16:45:57 Workerman[index.php] has been stopped
+2015-07-30 16:46:03 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:52:28 Workerman[index.php] Stopping ...
+2015-07-30 16:52:28 Workerman[index.php] has been stopped
+2015-07-30 16:52:34 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:52:50 WORKER EXIT UNEXPECTED 
+2015-07-30 16:52:50 WORKER EXIT UNEXPECTED 
+2015-07-30 16:52:50 WORKER EXIT UNEXPECTED 
+2015-07-30 16:52:50 WORKER EXIT UNEXPECTED 
+2015-07-30 16:52:55 WORKER EXIT UNEXPECTED 
+2015-07-30 16:53:25 WORKER EXIT UNEXPECTED 
+2015-07-30 16:54:03 Workerman[index.php] Stopping ...
+2015-07-30 16:54:03 Workerman[index.php] has been stopped
+2015-07-30 16:54:05 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:54:07 WORKER EXIT UNEXPECTED 
+2015-07-30 16:54:07 WORKER EXIT UNEXPECTED 
+2015-07-30 16:55:07 WORKER EXIT UNEXPECTED 
+2015-07-30 16:55:19 WORKER EXIT UNEXPECTED 
+2015-07-30 16:55:19 WORKER EXIT UNEXPECTED 
+2015-07-30 16:56:28 Workerman[index.php] Stopping ...
+2015-07-30 16:56:28 Workerman[index.php] has been stopped
+2015-07-30 16:56:30 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:56:32 worker[none:5355] exit with status 65280
+2015-07-30 16:56:32 worker[none:5356] exit with status 65280
+2015-07-30 16:56:37 Workerman[index.php] Stopping ...
+2015-07-30 16:56:37 Workerman[index.php] has been stopped
+2015-07-30 16:56:44 Workerman[index.php] start in DEBUG mode
+2015-07-30 16:56:46 worker[none:5550] exit with status 65280
+2015-07-30 16:56:46 worker[none:5551] exit with status 65280
+2015-07-30 16:57:27 Workerman[index.php] Stopping ...
+2015-07-30 16:57:27 Workerman[index.php] has been stopped
+2015-07-30 16:57:31 Workerman[index.php] start in DEBUG mode
+2015-07-30 17:03:57 Workerman[index.php] Stopping ...
+2015-07-30 17:03:57 Workerman[index.php] has been stopped
+2015-07-30 17:04:01 Workerman[index.php] start in DEBUG mode
+2015-07-30 17:04:03 worker[none:5765] exit with status 65280
+2015-07-30 17:04:03 worker[none:5764] exit with status 65280
+2015-07-30 17:04:08 worker[none:5767] exit with status 65280
+2015-07-30 17:04:38 worker[none:5766] exit with status 65280
+2015-07-30 17:04:43 Workerman[index.php] Stopping ...
+2015-07-30 17:04:43 Workerman[index.php] has been stopped
+2015-07-30 17:04:47 Workerman[index.php] start in DEBUG mode
+2015-07-30 17:04:50 WORKER EXIT UNEXPECTED 
+2015-07-30 17:04:50 WORKER EXIT UNEXPECTED 
+2015-07-30 17:05:50 WORKER EXIT UNEXPECTED 
+2015-07-30 17:06:21 Workerman[index.php] Stopping ...
+2015-07-30 17:06:21 Workerman[index.php] has been stopped
+2015-07-30 17:09:45 Workerman[index.php] start in DEBUG mode
+2015-07-30 17:09:54 Workerman[index.php] Stopping ...
+2015-07-30 17:09:54 Workerman[index.php] has been stopped
+2015-07-30 17:09:55 Workerman[index.php] start in DEBUG mode
+2015-07-30 17:09:56 Workerman[index.php] Stopping ...
+2015-07-30 17:09:56 Workerman[index.php] has been stopped
+2015-07-30 17:10:01 Workerman[index.php] start in DEBUG mode
+2015-07-30 17:10:09 WORKER EXIT UNEXPECTED 
+2015-07-30 17:10:09 WORKER EXIT UNEXPECTED 
+2015-07-30 17:11:14 Workerman[index.php] Stopping ...
+2015-07-30 17:11:14 Workerman[index.php] has been stopped
+2015-07-30 17:11:19 Workerman[index.php] start in DEBUG mode
+2015-07-30 17:11:21 WORKER EXIT UNEXPECTED 
+2015-07-30 17:11:21 WORKER EXIT UNEXPECTED 
+2015-07-30 17:14:16 WORKER EXIT UNEXPECTED 
+2015-07-30 17:14:16 WORKER EXIT UNEXPECTED 
+2015-07-30 17:14:20 Workerman[index.php] Stopping ...
+2015-07-30 17:14:20 Workerman[index.php] has been stopped
+2015-07-30 17:14:25 Workerman[index.php] start in DEBUG mode
+2015-07-30 17:14:28 WORKER EXIT UNEXPECTED 
+2015-07-30 17:14:28 WORKER EXIT UNEXPECTED 
