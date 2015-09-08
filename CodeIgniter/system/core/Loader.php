@@ -266,6 +266,8 @@ class CI_Loader {
 
 		if (in_array($name, $this->_ci_models, TRUE))
 		{
+			$CI =& get_instance();
+			$CI->$name = new $model();	
 			return $this;
 		}
 

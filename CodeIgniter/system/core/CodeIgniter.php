@@ -395,42 +395,104 @@ if ( ! is_php('5.4'))
  *  controller methods that begin with an underscore.
  */
 
-	$e404 = FALSE;
-	$class = ucfirst($RTR->class);
-	$method = $RTR->method;
+	//扫描所有控制器并且载入
+	$controls = scandir(APPPATH.'controllers/');
+	$rarr = array();
+	foreach ($controls as & $control) {
+		if($control=='.' OR $control=='..'){
+			continue;
+		}
+		$controlExt = explode('.', $control);
+		if(count($controlExt)<2 OR strtolower(array_pop($controlExt)) != 'php'){
+			continue;
+		}
+		$route = array('controller' => $controlExt[0]);
 
-	if (empty($class) OR ! file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'))
-	{
+		$ROU = new CI_Router($route);
+		$method = $ROU->method;
+		$class = ucfirst($ROU->class);
+		if(file_exists(APPPATH.'controllers/'.$ROU->directory.$class.'.php')){
+			require_once(APPPATH.'controllers/'.$ROU->directory.$class.'.php');
+			$rarr[$class] = $ROU;
+		}
+	}
+    
+
+
+    //扫描所有模型并载入、压栈
+    $CI = new CI_Controller();
+    $models = scandir(APPPATH.'models/');
+    // $marr = array();
+    foreach ($models as & $model) {
+    	if($model=='.' OR $model=='..'){
+			continue;
+		}
+		$modelExt = explode('.', $model);
+
+		if(count($modelExt)<2 OR strtolower(array_pop($modelExt)) != 'php'){
+			continue;
+		}
+
+		$model = ucfirst($modelExt[0]);
+		$CI->load->model($model);
+		// if(file_exists(APPPATH.'models/'.$model.'.php')){
+		// 	require_once(APPPATH.'models/'.$model.'.php');
+		// $marr[$model] = $CI->$model;
+		// }
+    }
+
+/*
+ * ------------------------------------------------------
+ *  Is there a "pre_controller" hook?
+ * ------------------------------------------------------
+ */
+function &executeMethod($controller, $function, &$response){
+	global $EXT;
+	global $BM;
+	global $CI;
+	global $OUT;
+	global $rarr;
+	global $method;
+	global $params;
+	global $URI;
+	global $RTR;
+
+	$controller = ucfirst($controller);
+	$e404 = FALSE;
+
+	if (empty($controller) OR !isset($rarr[$controller]) OR ! file_exists(APPPATH.'controllers/'.$rarr[$controller]->directory.$controller.'.php'))
+	{   
 		$e404 = TRUE;
 	}
 	else
 	{
-		require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
 
-		if ( ! class_exists($class, FALSE) OR $method[0] === '_' OR method_exists('CI_Controller', $method))
+		if ( ! class_exists($controller, FALSE) OR $function[0] === '_' OR method_exists('CI_Controller', $function))
 		{
 			$e404 = TRUE;
 		}
-		elseif (method_exists($class, '_remap'))
+		elseif (method_exists($controller, '_remap'))
 		{
-			$params = array($method, array_slice($URI->rsegments, 2));
-			$method = '_remap';
+			$params = array($function, array_slice($URI->rsegments, 2));
+			$function = '_remap';
 		}
 		// WARNING: It appears that there are issues with is_callable() even in PHP 5.2!
 		// Furthermore, there are bug reports and feature/change requests related to it
 		// that make it unreliable to use in this context. Please, DO NOT change this
 		// work-around until a better alternative is available.
-		elseif ( ! in_array(strtolower($method), array_map('strtolower', get_class_methods($class)), TRUE))
+		elseif ( ! in_array(strtolower($function), array_map('strtolower', get_class_methods($controller)), TRUE))
 		{
 			$e404 = TRUE;
-		}
+		} 
 	}
+
+		 
 
 	if ($e404)
 	{
-		if ( ! empty($RTR->routes['404_override']))
+		if ( ! empty($rarr[$controller]->routes['404_override']))
 		{
-			if (sscanf($RTR->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2)
+			if (sscanf($rarr[$controller]->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2)
 			{
 				$error_method = 'index';
 			}
@@ -439,18 +501,18 @@ if ( ! is_php('5.4'))
 
 			if ( ! class_exists($error_class, FALSE))
 			{
-				if (file_exists(APPPATH.'controllers/'.$RTR->directory.$error_class.'.php'))
+				if (file_exists(APPPATH.'controllers/'.$rarr[$controller]->directory.$error_class.'.php'))
 				{
-					require_once(APPPATH.'controllers/'.$RTR->directory.$error_class.'.php');
+					require_once(APPPATH.'controllers/'.$rarr[$controller]->directory.$error_class.'.php');
 					$e404 = ! class_exists($error_class, FALSE);
 				}
 				// Were we in a directory? If so, check for a global override
-				elseif ( ! empty($RTR->directory) && file_exists(APPPATH.'controllers/'.$error_class.'.php'))
+				elseif ( ! empty($rarr[$controller]->directory) && file_exists(APPPATH.'controllers/'.$error_class.'.php'))
 				{
 					require_once(APPPATH.'controllers/'.$error_class.'.php');
 					if (($e404 = ! class_exists($error_class, FALSE)) === FALSE)
 					{
-						$RTR->directory = '';
+						$rarr[$controller]->directory = '';
 					}
 				}
 			}
@@ -463,17 +525,17 @@ if ( ! is_php('5.4'))
 		// Did we reset the $e404 flag? If so, set the rsegments, starting from index 1
 		if ( ! $e404)
 		{
-			$class = $error_class;
-			$method = $error_method;
+			$controller = $error_class;
+			$function = $error_method;
 
 			$URI->rsegments = array(
-				1 => $class,
-				2 => $method
+				1 => $controller,
+				2 => $function
 			);
 		}
 		else
 		{
-			show_404($RTR->directory.$class.'/'.$method);
+			show_404($RTR->directory.$controller.'/'.$function);
 		}
 	}
 
@@ -482,20 +544,6 @@ if ( ! is_php('5.4'))
 		$params = array_slice($URI->rsegments, 2);
 	}
 
-/*
- * ------------------------------------------------------
- *  Is there a "pre_controller" hook?
- * ------------------------------------------------------
- */
-function &executeMethod(){
-	global $EXT;
-	global $BM;
-	global $CI;
-	global $OUT;
-	global $class;
-	global $method;
-	global $params;
-
 	$EXT->call_hook('pre_controller');
 	/*
  * ------------------------------------------------------
@@ -503,10 +551,9 @@ function &executeMethod(){
  * ------------------------------------------------------
  */
 	// Mark a start point so we can benchmark the controller
-	$BM->mark('controller_execution_time_( '.$class.' / '.$method.' )_start');
+	$BM->mark('controller_execution_time_( '.$controller.' / '.$function.' )_start');
 
-	$CI = new $class();
-
+	$CI = new $controller();
 /*
  * ------------------------------------------------------
  *  Is there a "post_controller_constructor" hook?
@@ -519,10 +566,11 @@ function &executeMethod(){
  *  Call the requested method
  * ------------------------------------------------------
  */  
-	$reslut = call_user_func_array(array(&$CI, $method), $params);
+	$params[] = $response;
+	$reslut = call_user_func_array(array(&$CI, $function), $params);
 
 	// Mark a benchmark end point
-	$BM->mark('controller_execution_time_( '.$class.' / '.$method.' )_end');
+	$BM->mark('controller_execution_time_( '.$controller.' / '.$function.' )_end');
 
 /*
  * ------------------------------------------------------

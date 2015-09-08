@@ -3,7 +3,7 @@
  * @Author: liuyujie
  * @Date:   2015-07-30 15:11:01
  * @Last Modified by:   liuyujie
- * @Last Modified time: 2015-07-30 17:25:24
+ * @Last Modified time: 2015-07-31 17:30:38
  */
 
 // ci index config
@@ -251,33 +251,47 @@ require_once BASEPATH.'core/CodeIgniter.php';
 
 require_once './Workerman/Autoloader.php';
 use Workerman\Worker;
-$http_worker = new Worker("http://0.0.0.0:2345");
+use \Workerman\Protocols\Http;
+use \Workerman\Protocols\HttpCache;
 
-$http_worker->count = 4;
-
+$http_worker = new Worker("http://0.0.0.0:8000");
+$http_worker->count = 100;
 $http_worker->onMessage = function($connection, $data)
 {
     // $_GET, $_POST, $_COOKIE, $_SESSION, $_SERVER, $_FILES are available
     // var_dump($_GET, $_POST, $_COOKIE, $_SESSION, $_SERVER, $_FILES);
     // send data to client
     // $connection->send("hello world \n");
+	Http::header("Connection: Keep-Alive");
+
+	if(!strstr($_SERVER['HTTP_ACCEPT'],'text/html')){
+		// die;
+	}
+
+
     global $params;
     global $SEC;
     global $routing;
 
     $uriStr = $_SERVER['REQUEST_URI'];
     $uriArr = explode('/', $uriStr);
-
+    $uriArr = array_filter($uriArr);
+    $uriArr = array_values($uriArr);
+ 
     if(count($uriArr) && count($uriArr)==1){
-    	$routing[0] = $SEC->xss_clean($uriArr[0]);
+    	$controller = $SEC->xss_clean($uriArr[0]);
+    	$function = 'index';
     } elseif(count($uriArr)>=2) {
-    	$routing[0] = $SEC->xss_clean($uriArr[0]);
-    	$routing[1] = $SEC->xss_clean($uriArr[1]);
+    	$controller = $SEC->xss_clean($uriArr[0]);
+    	$function = $SEC->xss_clean($uriArr[1]);
+    } else {
+    	$controller = $routing['controller'];
+    	$function = $routing['function'];
     }
 
-    // var_dump($control);die;
-    $params[] = $connection;
-    executeMethod();
+ 	
+    // $params[] = $connection;
+    executeMethod($controller, $function, $connection);
 };
 
 Worker::runAll();
